@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환영합니다</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero-section {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .hero-title span {
+            color: var(--primary-color);
+        }
+        .hero-desc {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        .link-btn {
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 140px;
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--input-border);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .btn-outline:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box hero-section">
+            <h1 class="hero-title">나의 첫 <span>웹 프로젝트</span></h1>
+            <p class="hero-desc">현대적이고 아름다운 UI로 완성된<br>시작 페이지에 오신 것을 환영합니다.</p>
+            
+            <div class="action-buttons">
+                <button type="button" onclick="goToPage('login.html')" class="btn primary-btn link-btn">로그인</button>
+                <button type="button" onclick="goToPage('signup.html')" class="btn btn-outline link-btn">회원가입</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
