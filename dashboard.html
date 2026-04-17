@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>대시보드 - 성공적으로 로그인됨</title>
+    <title>MyPlay - 대시보드</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .dashboard-section {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        
-        .welcome-avatar {
-            font-size: 64px;
-            margin-bottom: 16px;
-        }
-
-        .welcome-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 12px;
-        }
-
-        .welcome-desc {
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
-
-        .link-btn {
-            text-decoration: none;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            min-width: 140px;
-        }
-
-        .btn-logout {
-            background-color: transparent;
-            color: #ef4444; /* Red 500 */
-            border: 2px solid #fca5a5; /* Red 300 */
-        }
-
-        .btn-logout:hover {
-            background-color: #ef4444;
-            color: white;
-            border-color: #ef4444;
-            transform: translateY(-2px);
-        }
-        
-        .btn-logout:active {
-            transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="ott.css">
 </head>
+<body class="ott-body">
 
-<body>
-    <div class="auth-container">
-        <div class="auth-box dashboard-section">
-            <div class="welcome-avatar">🎉</div>
-            <h2 class="welcome-title">환영합니다!</h2>
-            <p class="welcome-desc">성공적으로 로그인하셨습니다.<br>나만의 회원 전용 공간에 오신 것을 환영해요.</p>
-            
-            <div class="action-buttons" style="display: flex; justify-content: center;">
-                <button type="button" onclick="handleLogout()" class="btn btn-logout link-btn">로그아웃</button>
+    <!-- Header Navigation -->
+    <header class="ott-header">
+        <div class="header-left">
+            <h1 class="logo">
+                <span class="logo-icon">▶</span>
+                <span>MyPlay</span>
+            </h1>
+            <nav class="main-nav">
+                <a href="#">TV</a>
+                <a href="#">영화</a>
+                <a href="#">스포츠</a>
+                <a href="#">스토어</a>
+                <a href="#">키즈</a>
+                <a href="#">라이브</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="dropdown">
+                <span>카테고리 ⌵</span>
+            </div>
+            <div class="search-icon">🔍</div>
+            <div class="profile-icon" id="profile-icon">동</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-slider">
+        <div class="hero-slide active">
+            <div class="hero-bg" style="background-image: url('hero_banner.png');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="badge">▶ 시리즈</div>
+                <h2 class="hero-title">강호동네<br>서점</h2>
+                <div class="hero-meta">
+                    <span class="star">★</span> 4.5 ‧ 토크쇼 ‧ 40분
+                </div>
+                <button class="play-btn">재생하기</button>
+            </div>
+            <div class="hero-pagination">
+                <button class="page-btn">❮</button>
+                <span>1 / 12</span>
+                <button class="page-btn">❯</button>
             </div>
         </div>
-    </div>
-    
+    </section>
+
+    <!-- Categories / Thumbnails -->
+    <section class="content-row">
+        <h3 class="row-title">시청 중인 콘텐츠</h3>
+        <div class="thumbnails">
+            <div class="thumb card-1">
+                <div class="progress"><div class="progress-bar" style="width: 40%"></div></div>
+            </div>
+            <div class="thumb card-2"></div>
+            <div class="thumb card-3"></div>
+            <div class="thumb card-4"></div>
+            <div class="thumb card-5"></div>
+            <div class="thumb card-6"></div>
+        </div>
+    </section>
+
     <script src="script.js"></script>
     <script>
-        // 페이지 로드 시 LocalStorage를 확인해 이름(username)을 화면에 띄울 수 있습니다.
         document.addEventListener('DOMContentLoaded', () => {
             const dataStr = localStorage.getItem('userData');
             if (dataStr) {
                 const data = JSON.parse(dataStr);
-                const titleNode = document.querySelector('.welcome-title');
-                if (titleNode) {
-                    titleNode.innerText = data.username + '님, 환영합니다!';
+                const profileNode = document.getElementById('profile-icon');
+                if (profileNode && data.username) {
+                    profileNode.innerText = data.username.charAt(0);
+                    // Add click event for logout
+                    profileNode.addEventListener('click', () => {
+                        if(confirm('로그아웃 하시겠습니까?')) {
+                            handleLogout();
+                        }
+                    });
                 }
             } else {
-                // 로그인 데이터가 없는데 대시보드에 접근했다면 로그인 페이지로 돌려보냄
                 alert('비정상적인 접근입니다. 다시 로그인해주세요.');
                 goToPage('login.html');
             }
         });
     </script>
 </body>
-
 </html>
